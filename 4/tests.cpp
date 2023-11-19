@@ -138,54 +138,54 @@ TEST(Romb_, test_RombCenter_02)
     ASSERT_TRUE(tr.center() == p);
 }
 
-TEST(Pentagon_, test_PentagonInit_01)
+TEST(Rectangle_, test_RectangleInit_01)
 {
-    Pentagon<int> tr;
+    Rectangle<int> tr;
     ASSERT_TRUE(tr.square() == 0);
-    Point<int> p(2,-3), p2(3,-1), p3(5,-3), p6(4,-4), p7(4,-4);
-    Pentagon<int> tr2(p,p2,p3,p6,p7);
+    Point<int> p(2,-3), p2(3,-1), p3(5,-3), p6(4,-4);
+    Rectangle<int> tr2(p,p2,p3,p6);
     tr = tr2;
     ASSERT_TRUE(tr == tr2);
     ASSERT_TRUE(tr.square() != 0);
 }
 
-TEST(Pentagon_, test_PentagonInit_02)
+TEST(Rectangle_, test_RectangleInit_02)
 {
-    Pentagon<int> tr;
-    Point<int> p(2,-3), p2(3,-1), p3(5,-3), p6(4,-4), p7(4,-4);
-    Pentagon<int> tr2(p,p2,p3,p6,p7);
+    Rectangle<int> tr;
+    Point<int> p(2,-3), p2(3,-1), p3(5,-3), p6(4,-4);
+    Rectangle<int> tr2(p,p2,p3,p6);
     tr = tr2;
     ASSERT_TRUE(p.x_ == 2);
     ASSERT_TRUE(p.y_ == -3);
     ASSERT_TRUE(tr == tr2);
 }
 
-TEST(Pentagon_, test_PentagonSquare_01)
+TEST(Rectangle_, test_RectangleSquare_01)
 {
-    Point<float> p(2,-3), p2(3,-1), p3(5,-3), p6(4,-4), p7(4,-4);
-    Pentagon<float> tr2(p,p2,p3,p6,p7);
+    Point<float> p(2,-3), p2(3,-1), p3(5,-3), p6(4,-4);
+    Rectangle<float> tr2(p,p2,p3,p6);
     float sqr = tr2;
     ASSERT_TRUE(sqr != 0);
     std::cout << sqr << std::endl;
 
 }
 
-TEST(Pentagon_, test_PentagonSquare_02)
+TEST(Rectangle_, test_RectangleSquare_02)
 {
     Vector<int> arr;
-    Point<int> p(2,-3), p2(3,-1), p3(5,-3), p6(4,-4), p7(4,-4);
-    auto tr2 = std::make_unique<Pentagon<int>>(p,p2,p3,p6,p7);
+    Point<int> p(2,-3), p2(3,-1), p3(5,-3), p6(4,-4);
+    auto tr2 = std::make_unique<Rectangle<int>>(p,p2,p3,p6);
     arr.push_back(std::move(tr2));
 
     ASSERT_TRUE(arr.get(0)->square() != 0);
 
 }
 
-TEST(Pentagon_, test_PentagonCenter_01)
+TEST(Rectangle_, test_RectangleCenter_01)
 {
     Vector<int> arr;
-    Point<int> p(2,-3), p2(3,-1), p3(5,-3), p6(4,-4), p7(4,-4);
-    auto tr2 = std::make_unique<Pentagon<int>>(p,p2,p3,p6,p7);
+    Point<int> p(2,-3), p2(3,-1), p3(5,-3), p6(4,-4);
+    auto tr2 = std::make_unique<Rectangle<int>>(p,p2,p3,p6);
     arr.push_back(std::move(tr2));
     Point<int> p10;
 
@@ -193,11 +193,11 @@ TEST(Pentagon_, test_PentagonCenter_01)
 
 }
 
-TEST(Pentagon_, test_PentagonCenter_02)
+TEST(Rectangle_, test_RectangleCenter_02)
 {
-    Pentagon<int> tr;
-    Point<int> p, p2, p3, p6, p7;
-    Pentagon<int> tr2(p,p2,p3,p6,p7);
+    Rectangle<int> tr;
+    Point<int> p, p2, p3, p6;
+    Rectangle<int> tr2(p,p2,p3,p6);
     ASSERT_TRUE(tr.center() == p);
 }
 
