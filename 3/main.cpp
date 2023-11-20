@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "Vector.hpp"
+#include "vector.hpp"
 
 #include "point.hpp"
 #include "figure.hpp"
