@@ -1,4 +1,4 @@
-#include "Vector.hpp"
+#include "vector.hpp"
 
 Vector::Vector() : buf(nullptr), size_(0), cap(3), head(0){ //изначально создаем с буфером под три элемента класса Figure, но размер 0
     buf = new Figure*[cap];
