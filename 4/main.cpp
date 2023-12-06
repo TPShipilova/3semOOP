@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
-#include "Vector.hpp"
-//#include "Vector2.hpp"
-
+#include "vector.hpp"
 #include "point.hpp"
 #include "figure.hpp"
 #include "trapezia.hpp"
