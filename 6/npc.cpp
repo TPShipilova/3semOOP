@@ -7,14 +7,14 @@ NPC::NPC(NpcType t, std::istream &is) : type(t)
     is >> y;
 }
 
-void NPC::subscribe(std::shared_ptr<IFightObserver> observer)
+void NPC::subscribe(std::shared_ptr<IFightVisitor> visitor)
 {
-   observers.push_back(observer);
+   visitors.push_back(visitor);
 }
 
 void NPC::fight_notify(const std::shared_ptr<NPC> defender, bool win)
 {
-    for (auto &o : observers)
+    for (auto &o : visitors)
         o->on_fight(shared_from_this(), defender, win);
 }
 
