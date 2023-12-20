@@ -3,17 +3,17 @@
 #include "knight.hpp"
 #include "orc.hpp"
 
-// Text Observer
-class TextObserver : public IFightObserver
+// Text Visitor
+class TextVisitor : public IFightVisitor
 {
 private:
-    TextObserver(){};
+    TextVisitor(){};
 
 public:
-    static std::shared_ptr<IFightObserver> get()
+    static std::shared_ptr<IFightVisitor> get()
     {
-        static TextObserver instance;
-        return std::shared_ptr<IFightObserver>(&instance, [](IFightObserver *) {});
+        static TextVisitor instance;
+        return std::shared_ptr<IFightVisitor>(&instance, [](IFightVisitor *) {});
     }
 
     void on_fight(const std::shared_ptr<NPC> attacker, const std::shared_ptr<NPC> defender, bool win) override
@@ -28,20 +28,20 @@ public:
     }
 };
 
-class F_Observer : public IFightObserver
+class F_Visitor : public IFightVisitor
 {
 private:
     std::ofstream file;
 
-    F_Observer()
+    F_Visitor()
     {
         file.open("log.txt");
     }
 
 public:
-    static std::shared_ptr<IFightObserver> get()
+    static std::shared_ptr<IFightVisitor> get()
     {
-        static std::shared_ptr<IFightObserver> instance(new F_Observer());
+        static std::shared_ptr<IFightVisitor> instance(new F_Visitor());
         return instance;
     }
 
@@ -81,8 +81,8 @@ std::shared_ptr<NPC> factory(std::istream &is)
         std::cerr << "unexpected NPC type:" << type << std::endl;
 
     if (result){
-        result->subscribe(TextObserver::get());
-        result->subscribe(F_Observer::get());
+        result->subscribe(TextVisitor::get());
+        result->subscribe(F_Visitor::get());
     }
 
     return result;
@@ -106,8 +106,8 @@ std::shared_ptr<NPC> factory(NpcType type, int x, int y)
         break;
     }
     if (result){
-        result->subscribe(TextObserver::get());
-        result->subscribe(F_Observer::get());
+        result->subscribe(TextVisitor::get());
+        result->subscribe(F_Visitor::get());
     }
 
     return result;
@@ -148,15 +148,6 @@ std::ostream &operator<<(std::ostream &os, const set_t &array)
         n->print();
     return os;
 }
-
-
-// ВНИМАНИЕ: метод осуществляющий сражение написан неправильно!
-// Переделайте его на использование паттерна Visitor
-// То есть внутри цикла вместо кучи условий должно быть:
-//
-// success = defender->accept(attacker);
-//
-// В NPC методы типа is_Bear - станут не нужны
 
 set_t fight(const set_t &array, size_t distance)
 {
